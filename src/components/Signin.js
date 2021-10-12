@@ -19,7 +19,7 @@ export default class Signin extends Component {
     }
 
     // ✔ Async Fetch method called on form submit
-    handleSignup = async (e) => {
+    handleSignIn = async (e) => {
         // ✔  - Prevents defaults
         e.preventDefault();
         // ✔  - destructures state and props
@@ -45,10 +45,10 @@ export default class Signin extends Component {
             <div>
                 {/* ✔ Form here for sign in.
                     - ✔ onSubmit => Calls fetch method */}
-                <form onSubmit={this.handleSignUp}>
+                <form onSubmit={this.handleSignIn}>
                 {/* ✔ Inputs
                     - ✔ Values = state
-                    - Names? 
+                    - ⚠ Names? 
                     - ✔ onChange => Call associated method */}
                     <label>
                         Email
