@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import {
     BrowserRouter as Router, 
+    NavLink, 
     Route, 
     Switch,
 } from 'react-router-dom';
-import SearchPage from './SearchPage.js';
-import DetailPage from './DetailPage.js';
+import Home from './components/Home.js'
+import Signin from './components/Signin.js'
+import Signup from './components/Signup.js'
+import Todos from './components/Todos.js'
 
 import './App.css'
 
@@ -21,12 +24,17 @@ export default class App extends Component {
     const { token } = this.state
         return (
             <div>
+              <NavLink exact to='/signup'>Signup</NavLink>
+              <NavLink exact to='/signin'>Signin</NavLink>
+              {/* Needs a conditional: If token doesn't exist, this redirects to signup page.*/}
+              {/* Does this need the /:id as well?*/}
+              <NavLink exact to='/todos/'>todos</NavLink>
                 <Router>
                     <Switch>
                         <Route 
                             path="/" 
                             exact
-                            render={(routerProps) => <Homepage {...routerProps} />} 
+                            render={(routerProps) => <Home {...routerProps} />} 
                         />
                         {/* pass handleTokenChange to signup as prop */}
                         <Route 
@@ -48,7 +56,7 @@ export default class App extends Component {
                         <Route 
                           path="/todos/:Id" 
                           exact
-                          render={(routerProps) => <TodosPage
+                          render={(routerProps) => <Todos
                             // token={token}
                             {...routerProps} />} 
                         />
