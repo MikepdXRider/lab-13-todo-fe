@@ -2,7 +2,7 @@ import request from 'superagent';
 
 const URL = 'https://afternoon-beach-72842.herokuapp.com/api/todos'
 
-export async function getTodos(token) {
+export async function getTodo(token) {
     const response = await request
         .get(`${URL}api/todos`)
         .set('Authorization', token);

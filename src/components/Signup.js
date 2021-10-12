@@ -9,16 +9,16 @@ export default class Signin extends Component {
     state = {
         email: '',
         password: ''
-    }
+    };
 
     // ✔ Async handleEmailChange method which sets state based on input.
     handleEmailChange = async (e) => {
-        await this.setState({email: e.target.value})
+        await this.setState({email: e.target.value});
     }
 
     // ✔ Async handlePasswordChange method which sets state based on input. 
     handlePasswordChange = async (e) => {
-        await this.setState({email: e.target.value})
+        await this.setState({email: e.target.value});
     }
 
     // ✔ Async Fetch method called on form submit
@@ -32,7 +32,7 @@ export default class Signin extends Component {
         const newUserObj = {
             email: email,
             password: password
-        }
+        };
         // ✔  - Calls a fetch-utils function with userObject as arguement. Destructure token from response.
         const { token } = signUp(newUserObj);
         // ✔  - Calls callback method from app.js to send the token back to app.js state/local storage.
@@ -43,7 +43,7 @@ export default class Signin extends Component {
     
     render() {
         // ✔ Destructure state 
-        const { email, password } = this.state
+        const { email, password } = this.state;
         return (
             <div>
                 {/* ✔ Form here for sign in.
