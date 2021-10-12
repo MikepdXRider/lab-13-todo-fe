@@ -14,19 +14,19 @@ import Todos from './components/Todos.js'
 import './App.css'
 
 // ✔ Magic string for local state here. 
-const TOKEN = 'TOKEN'
+const TOKEN_KEY = 'TOKEN'
 
 export default class App extends Component {
     // ✔ State with token set to retrieve local storage or emtpy string.
     state = {
-      token: localStorage.getItem(TOKEN) || ''
+      token: localStorage.getItem(TOKEN_KEY) || ''
     }
 
 
     // ✔ handleTokenChange method which sets state and localstorage for token. Takes in token.
     handleTokenChange = async token => {
       await this.setState(token);
-      await localStorage.setItem(TOKEN, token)
+      await localStorage.setItem(TOKEN_KEY, token)
     } 
   
 
