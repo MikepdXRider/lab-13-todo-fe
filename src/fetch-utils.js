@@ -1,10 +1,10 @@
 import request from 'superagent';
 
-const URL = 'https://afternoon-beach-72842.herokuapp.com/api'
+const URL = 'https://afternoon-beach-72842.herokuapp.com/api/todos'
 
 export async function getTodos(token) {
     const response = await request
-        .get(`${URL}/todos`)
+        .get(`${URL}api/todos`)
         .set('Authorization', token);
 
     return response.body;
@@ -12,7 +12,7 @@ export async function getTodos(token) {
 
 export async function createTodos(token, newTodoObj) {
     const response = await request
-        .post(`${URL}/todos`)
+        .post(`${URL}api/todos`)
         .set('Authorization', token)
         .send({todo_description: newTodoObj});
 
@@ -21,7 +21,7 @@ export async function createTodos(token, newTodoObj) {
 
 export async function updateTodo(token, updatedTodoObj, id) {
     const response = await request
-        .get(`${URL}/todos/${id}`)
+        .get(`${URL}api/todos/${id}`)
         .set('Authorization', token)
         .send(updatedTodoObj);
 
@@ -30,8 +30,7 @@ export async function updateTodo(token, updatedTodoObj, id) {
 
 export async function signUp(token, newUserObj) {
     const response = await request
-        .get(`${URL}/todos`)
-        .set('Authorization', token)
+        .post(`${URL}auth/signup`)
         .send(newUserObj);
 
     // This contains token
@@ -40,8 +39,7 @@ export async function signUp(token, newUserObj) {
 
 export async function signIn(token, userObj) {
     const response = await request
-        .get(`${URL}/todos`)
-        .set('Authorization', token)
+        .post(`${URL}auth/signin`)
         .send(userObj);
         
     // This contains token
