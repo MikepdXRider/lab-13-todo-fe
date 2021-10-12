@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { signUp } from '../fetch-utils.js'
 
-// Essentially identical to 
+// Essentially identical to signin page.
 
 export default class Signin extends Component {
     // ✔ State with email and password properties. 
