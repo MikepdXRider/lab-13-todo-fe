@@ -28,7 +28,7 @@ export async function updateTodo(token, updatedTodoObj, id) {
     return response.body;
 }
 
-export async function signUp(token, newUserObj) {
+export async function signUp(newUserObj) {
     const response = await request
         .post(`${URL}auth/signup`)
         .send(newUserObj);
@@ -37,7 +37,7 @@ export async function signUp(token, newUserObj) {
     return response.body;
 }
 
-export async function signIn(token, userObj) {
+export async function signIn(userObj) {
     const response = await request
         .post(`${URL}auth/signin`)
         .send(userObj);
