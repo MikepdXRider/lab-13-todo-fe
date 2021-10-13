@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { signUp } from '../fetch-utils.js'
 
 // Essentially identical to signin page.
@@ -45,10 +44,11 @@ export default class Signin extends Component {
         // ✔ Destructure state 
         const { email, password } = this.state;
         return (
-            <div>
+            <div className='signx-container'>
                 {/* ✔ Form here for sign in.
                     - ✔ onSubmit => Calls fetch method */}
-                <form onSubmit={this.handleSignUp}>
+                <form onSubmit={this.handleSignUp} className='signx-form'>
+                    <h2>Create an account!</h2>
                 {/* ✔ Inputs
                     - ✔ Values = state
                     - ⚠ Names? 
@@ -64,7 +64,7 @@ export default class Signin extends Component {
                     {/* ✔ Button to submit */}
                     <button>Sign-up</button>
                 </form>
-                <Link to='/signin'>Already have an account? Login!</Link>
+                {/* <Link to='/signin'>Already have an account? Login!</Link> */}
             </div>
         )
     }
