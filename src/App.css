@@ -50,7 +50,7 @@ a{
 
 .todo-page-container{
   display: grid;
-  grid-template: repeat(12, 1fr) / repeat(12, 1fr);
+  grid-template: repeat(3, 1fr) / repeat(12, 1fr);
 }
 
 .todos-container{

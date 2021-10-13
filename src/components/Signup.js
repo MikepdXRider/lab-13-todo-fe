@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { signUp } from '../fetch-utils.js'
 
 // Essentially identical to signin page.
