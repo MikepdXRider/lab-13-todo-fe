@@ -10,18 +10,19 @@ export default class Todos extends Component {
 
     // Async componentDidMount
     componentDidMount = async () => {
-        //  - destructures token from props. 
+        //  - destsructures token from props. 
         const { token } = this.props;
         //  - Await calls fetch-utils function to get all todos with token as arguement.
         const response = await getTodos(token);
         //  - sets todosDataArr state with returning todosData.
-        this.setState({todoDataArr: response.body});
+        console.log(response);
+        await this.setState({todoDataArr: response});
     }
 
 
     // handleTodoDescChange method which sets state for todo_description
     handleTodoDescChange = async (e) => {
-        this.setState({todo_description: e.target.value});
+        await this.setState({todo_description: e.target.value});
     }
 
     // Async Fetch method called on form submit
@@ -32,13 +33,14 @@ export default class Todos extends Component {
         const { todo_description } = this.state;
         const { token } = this.props;
         //  - Creates a userObject from state properties.
+        console.log(todo_description)
         const newTodoObj = {todo_description};
         //  - Await Calls a fetch-utils function with userObject as arguement. Destructure token from response.
-        createTodo(token, newTodoObj);
+        await createTodo(token, newTodoObj);
         //  - Await calls fetch-utils function to get all todos with token as arguement.
         const response = await getTodos(token);
         //  - sets todosDataArr state with returning todosData.
-        this.setState({todoDataArr: response.body});
+        this.setState({todoDataArr: response});
     }
 
 
@@ -48,32 +50,38 @@ export default class Todos extends Component {
         const { token } = this.props;
         const { todoDataArr } = this.state;
         // - grabs e.target.value(todo id).
-        const todoId = e.target.value;
+        const todoId = Number(e.target.getAttribute('value'));
         // - Creates updatedTodoObj
-        const selectedTodo = todoDataArr.find(item => item.id === todoId);
+        const selectedTodo = todoDataArr.filter(item => item.id === todoId);
         const updatedTodoObj = {
-            todo_description: selectedTodo.todo_description,
-            is_complete: !selectedTodo.is_complete
+            todo_description: selectedTodo[0].todo_description,
+            is_complete: !selectedTodo[0].is_complete
         };
         // - Await calls fetch-utils function to update completed status of todo, passing todoID and updatedTodoObject(Bang is_completed) as arguements.
         await updateTodo(token, updatedTodoObj, todoId);
         //  - Await calls fetch-utils function to get all todos with token as arguement.
         const response = await getTodos(token);
         //  - sets todosDataArr state with returning todosData.
-        this.setState({todoDataArr: response.body});
+        this.setState({todoDataArr: response});
     }
 
     
     render() {
+        const { todo_description, todoDataArr } = this.state
+        console.log(todo_description);
         return (
             <>
             <div>
                 {/* Form here for sign in.
                     - onSubmit => Calls fetch method */}
+                <form onSubmit={this.handleFormSubmit}>
                 {/* Inputs
                     - Values = state
                     - Names? 
                     - onChange => Call associated method */}
+                    <input onChange={this.handleTodoDescChange} value={todo_description} type='text'/>
+                    <button>Create</button>
+                </form>
             </div>
             <div>
                 {/* grabs todosDataArr from state
@@ -82,6 +90,21 @@ export default class Todos extends Component {
                         - element will require an onClick method
                         - element will require a value set to the todos id.
                         - element will require a className with a ternary to place a complete/incomplete class. */}
+                {
+                    todoDataArr
+                        .sort((a, b) => a.is_complete - b.is_complete)
+                        .map((item) => {
+                            return (
+                            <div 
+                                onClick={this.handleTodoUpdate} 
+                                value={item.id} 
+                                className={item.is_complete ? 'complete' : 'incomplete'}
+                            >
+                            {item.todo_description}
+                            </div>
+                            )
+                        })
+                }
             </div>
             </>
         )

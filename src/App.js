@@ -25,21 +25,21 @@ export default class App extends Component {
 
     // ✔ handleTokenChange method which sets state and localstorage for token. Takes in token.
     handleTokenChange = async token => {
-      await this.setState(token);
-      await localStorage.setItem(TOKEN_KEY, token)
+      await this.setState({token});
+      localStorage.setItem(TOKEN_KEY, token);
     } 
   
 
   render() {
     // ✔ destructure state
     const { token } = this.state
+    console.log(token, 'hello');
         return (
             <div>
                 <Router>
                     <NavLink exact to='/'>Home</NavLink>
                     <NavLink exact to='/signup'>Signup</NavLink>
                     <NavLink exact to='/signin'>Signin</NavLink>
-                    {/* ❓ Does this need the /:id as well? ❓ */}
                     <NavLink exact to='/todos/'>todos</NavLink>
                     <Switch>
                         <Route 
@@ -68,9 +68,9 @@ export default class App extends Component {
                               />} 
                         />
                         {/* ✔ Pass token to todos page so it can perform fetch requests */}
-                        {/* ⚠ Needs a conditional: If token doesn't exist, this redirects to signup page.*/}
+                        {/* ✔ Needs a conditional: If token doesn't exist, this redirects to signup page.*/}
                         <Route 
-                          path="/todos/:Id" 
+                          path="/todos/" 
                           exact
                           render={(routerProps) =>
                             token
@@ -78,7 +78,6 @@ export default class App extends Component {
                                 token={token}
                                 {...routerProps} 
                               />
-                            // ❗ This isn't working ❗
                             : <Redirect to='/signup' />} 
                         />
                     </Switch>

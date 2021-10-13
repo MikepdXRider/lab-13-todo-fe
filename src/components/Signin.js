@@ -15,7 +15,7 @@ export default class Signin extends Component {
 
     // ✔ Async handlePasswordChange method which sets state based on input. 
     handlePasswordChange = async (e) => {
-        await this.setState({email: e.target.value});
+        await this.setState({password: e.target.value});
     }
 
     // ✔ Async Fetch method called on form submit
@@ -31,9 +31,9 @@ export default class Signin extends Component {
             password: password
         };
         // ✔  - Calls a fetch-utils function with userObject as arguement. Destructure token from response.
-        const { token } = signIn(userObj);
+        const { token } = await signIn(userObj);
         // ✔  - Calls callback method from app.js to send the token back to app.js state/local storage.
-        handleTokenChange(token);
+        await handleTokenChange(token);
         // ✔  - Redirects the user to todos page.
         this.props.history.push('/todos');
     }
@@ -56,7 +56,7 @@ export default class Signin extends Component {
                     </label>
                     <label>
                         Password
-                        <input onChange={this.handleEmailChange} type='password' value={password}/>
+                        <input onChange={this.handlePasswordChange} type='password' value={password}/>
                     </label>
                     {/* ✔ Button to submit */}
                     <button>Login</button>

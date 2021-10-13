@@ -1,49 +1,69 @@
 import request from 'superagent';
 
-const URL = 'https://afternoon-beach-72842.herokuapp.com/api/todos'
+const URL = 'https://afternoon-beach-72842.herokuapp.com/'
 
-export async function getTodo(token) {
-    const response = await request
-        .get(`${URL}api/todos`)
-        .set('Authorization', token);
+export async function getTodos(token) {
+    try{
+        const response = await request
+            .get(`${URL}api/todos`)
+            .set('Authorization', token);
 
-    return response.body;
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
-export async function createTodos(token, newTodoObj) {
-    const response = await request
-        .post(`${URL}api/todos`)
-        .set('Authorization', token)
-        .send({todo_description: newTodoObj});
+export async function createTodo(token, newTodoObj) {
+    try{
+        const response = await request
+            .post(`${URL}api/todos`)
+            .set('Authorization', token)
+            .send(newTodoObj);
 
-    return response.body;
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 export async function updateTodo(token, updatedTodoObj, id) {
-    const response = await request
-        .get(`${URL}api/todos/${id}`)
-        .set('Authorization', token)
-        .send(updatedTodoObj);
+    try{
+        const response = await request
+            .put(`${URL}api/todos/${id}`)
+            .set('Authorization', token)
+            .send(updatedTodoObj);
 
-    return response.body;
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 export async function signUp(newUserObj) {
-    const response = await request
-        .post(`${URL}auth/signup`)
-        .send(newUserObj);
+    try{
+        const response = await request
+            .post(`${URL}auth/signup`)
+            .send(newUserObj);
 
-    // This contains token
-    return response.body;
+        // This contains token
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 export async function signIn(userObj) {
-    const response = await request
-        .post(`${URL}auth/signin`)
-        .send(userObj);
-        
-    // This contains token
-    return response.body;
+    try{
+        const response = await request
+            .post(`${URL}auth/signin`)
+            .send(userObj);
+            
+        // This contains token
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 
