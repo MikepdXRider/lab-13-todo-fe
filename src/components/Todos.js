@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createTodo, getTodos, updateTodo } from '../fetch-utils.js'
+import { createTodo, deleteTodo, getTodos, updateTodo } from '../fetch-utils.js'
 
 export default class Todos extends Component {
     // State with todosDataArr, and todo_description properties. 
@@ -15,7 +15,6 @@ export default class Todos extends Component {
         //  - Await calls fetch-utils function to get all todos with token as arguement.
         const response = await getTodos(token);
         //  - sets todosDataArr state with returning todosData.
-        console.log(response);
         await this.setState({todoDataArr: response});
     }
 
@@ -45,20 +44,30 @@ export default class Todos extends Component {
 
 
     // Async handleTodoUpdate method called on todo click
-    handleTodoUpdate = async (e) => {
+    handleTodoUpdate = async (id) => {
         // - destructures token from props.
         const { token } = this.props;
         const { todoDataArr } = this.state;
-        // - grabs e.target.value(todo id).
-        const todoId = Number(e.target.getAttribute('value'));
         // - Creates updatedTodoObj
-        const selectedTodo = todoDataArr.filter(item => item.id === todoId);
+        const selectedTodo = todoDataArr.filter(item => item.id === id);
         const updatedTodoObj = {
             todo_description: selectedTodo[0].todo_description,
             is_complete: !selectedTodo[0].is_complete
         };
         // - Await calls fetch-utils function to update completed status of todo, passing todoID and updatedTodoObject(Bang is_completed) as arguements.
-        await updateTodo(token, updatedTodoObj, todoId);
+        await updateTodo(token, updatedTodoObj, id);
+        //  - Await calls fetch-utils function to get all todos with token as arguement.
+        const response = await getTodos(token);
+        //  - sets todosDataArr state with returning todosData.
+        this.setState({todoDataArr: response});
+    }
+
+
+    handleTodoDelete = async (id) => {
+        // - destructures token from props.
+        const { token } = this.props;
+        // - Await calls fetch-utils function to update completed status of todo, passing todoID and updatedTodoObject(Bang is_completed) as arguements.
+        await deleteTodo(token, id);
         //  - Await calls fetch-utils function to get all todos with token as arguement.
         const response = await getTodos(token);
         //  - sets todosDataArr state with returning todosData.
@@ -83,7 +92,7 @@ export default class Todos extends Component {
                         <label>
                             <input onChange={this.handleTodoDescChange} value={todo_description} type='text'/>
                         </label>
-                        <button>Create</button>
+                        <button className='form-button' >Create</button>
                     </form>
                 </div>
                 <div className='todos-container'>
@@ -98,12 +107,11 @@ export default class Todos extends Component {
                             .sort((a, b) => a.is_complete - b.is_complete)
                             .map(({id, is_complete, todo_description}) => {
                                 return (
-                                <div 
-                                    onClick={this.handleTodoUpdate} 
-                                    value={id} 
-                                    className={is_complete ? 'complete' : 'incomplete'}
-                                >
-                                {todo_description}
+                                <div className={`single-todo-container ${is_complete ? 'complete' : 'incomplete'}`}>
+                                    <div onClick={()=> this.handleTodoUpdate(id)} className={is_complete ? 'complete' : 'incomplete'} >
+                                        <p>{todo_description}</p>
+                                    </div>
+                                    <button onClick={()=> this.handleTodoDelete(id)} className='delete-button'>✖</button>
                                 </div>
                                 )
                             })

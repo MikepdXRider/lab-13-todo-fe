@@ -40,6 +40,18 @@ export async function updateTodo(token, updatedTodoObj, id) {
     }
 }
 
+export async function deleteTodo(token, id) {
+    try{
+        const response = await request
+            .delete(`${URL}api/todos/${id}`)
+            .set('Authorization', token);
+
+        return response.body;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 export async function signUp(newUserObj) {
     try{
         const response = await request

@@ -60,7 +60,7 @@ export default class Signin extends Component {
                         <input onChange={this.handlePasswordChange} type='password' value={password}/>
                     </label>
                     {/* ✔ Button to submit */}
-                    <button>Login</button>
+                    <button className='form-button'>Login</button>
                 </form>
             </div>
         )
