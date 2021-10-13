@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+https://answers.netlify.com/t/netlify-page-not-found-when-sharing-react-router-dom-based-links/11744/2
+
+# !!!Would be cool to turn this into a webapp that outlines all the steps to completing a fullstack app with the SQL BE template and npx create-react-app. 
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

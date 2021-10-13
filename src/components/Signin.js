@@ -42,20 +42,21 @@ export default class Signin extends Component {
         // ✔ Destructure state 
         const { email, password } = this.state;
         return (
-            <div>
+            <div className='signx-container'>
                 {/* ✔ Form here for sign in.
                     - ✔ onSubmit => Calls fetch method */}
-                <form onSubmit={this.handleSignIn}>
+                <form onSubmit={this.handleSignIn} className='signx-form'>
+                    <h2>Login to crush tasks!</h2>
                 {/* ✔ Inputs
                     - ✔ Values = state
                     - ⚠ Names? 
                     - ✔ onChange => Call associated method */}
                     <label>
-                        Email
+                        <h4>Email</h4>
                         <input onChange={this.handleEmailChange} type='email' value={email}/>
                     </label>
                     <label>
-                        Password
+                        <h4>Password</h4>
                         <input onChange={this.handlePasswordChange} type='password' value={password}/>
                     </label>
                     {/* ✔ Button to submit */}

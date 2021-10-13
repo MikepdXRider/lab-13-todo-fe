@@ -1,5 +1,145 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #root, .signx-container{
+  height: 100vh;
+  width: 100vw;
+}
+
+.root{
+  display: flex;
+  flex-direction: column;
+}
+
 .complete{
   text-decoration: line-through;
   background-color: grey;
 }
 
+.link-container{
+  min-height: 4vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+}
+
+a{
+  color: grey;
+  text-decoration: none;
+}
+
+.active-link{
+  color: orange;
+}
+
+.signx-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-page-container{
+  display: grid;
+  grid-template: repeat(12, 1fr) / repeat(12, 1fr);
+}
+
+.todos-container{
+  grid-area: 1 / 2 / span 3 / span 7;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-top: 5vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+  background-color: rgba(128, 128, 128, 0.144);
+}
+
+.todos-container div{
+  width: 30%;
+  height: 7vh;
+  border: 2px solid black;
+  margin-top: 5px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: orange;
+  overflow: auto;
+}
+
+.todos-container div:hover{
+  cursor: pointer;
+}
+
+.todo-form-container{
+  grid-area: 2 / 10 / span 1 / span 1;
+}
+
+form{
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signx-form{
+  height: 35vh;
+  width: 25vw;
+}
+
+.todo-form{
+  height: 20vh;
+  width: 20vw;
+}
+
+.todo-form label{
+  height: 20%;
+  width: 80%;
+}
+
+.todo-form label input{
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+h2{
+  color: orange;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  color: orange;
+  width: 50%;
+}
+
+label input{
+  height: 2.5vh;
+  width: 100%;
+}
+
+button{
+  width: 30%;
+  height: 4vh;
+  background-color: black;
+  border: 1px orange solid;
+  color: orange;
+  font-weight: bolder;
+  border-radius: 5px;
+  font-size: 1.05rem;
+}
+
+button:hover{
+  color: black;
+  background-color: orange;
+  cursor: pointer;
+}

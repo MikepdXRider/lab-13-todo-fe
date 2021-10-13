@@ -37,10 +37,12 @@ export default class App extends Component {
         return (
             <div>
                 <Router>
-                    <NavLink exact to='/'>Home</NavLink>
-                    <NavLink exact to='/signup'>Signup</NavLink>
-                    <NavLink exact to='/signin'>Signin</NavLink>
-                    <NavLink exact to='/todos/'>todos</NavLink>
+                  <div className='link-container'>
+                    <NavLink activeClassName='active-link' exact to='/'>🏡 Home</NavLink>
+                    <NavLink activeClassName='active-link' exact to='/todos/'>✔ Todos</NavLink>
+                    <NavLink activeClassName='active-link' exact to='/signin'>🟢Sign-in</NavLink>
+                    <NavLink activeClassName='active-link' exact to='/signup'>🔐Sign-up</NavLink>
+                  </div>
                     <Switch>
                         <Route 
                             path="/" 

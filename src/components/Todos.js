@@ -70,43 +70,46 @@ export default class Todos extends Component {
         const { todo_description, todoDataArr } = this.state
         console.log(todo_description);
         return (
-            <>
-            <div>
-                {/* Form here for sign in.
-                    - onSubmit => Calls fetch method */}
-                <form onSubmit={this.handleFormSubmit}>
-                {/* Inputs
-                    - Values = state
-                    - Names? 
-                    - onChange => Call associated method */}
-                    <input onChange={this.handleTodoDescChange} value={todo_description} type='text'/>
-                    <button>Create</button>
-                </form>
+            <div className='todo-page-container'>
+                <div className='todo-form-container'>
+                    {/* Form here for sign in.
+                        - onSubmit => Calls fetch method */}
+                    <form onSubmit={this.handleFormSubmit} className='todo-form'>
+                    <h2>Create a new todo!</h2>
+                    {/* Inputs
+                        - Values = state
+                        - Names? 
+                        - onChange => Call associated method */}
+                        <label>
+                            <input onChange={this.handleTodoDescChange} value={todo_description} type='text'/>
+                        </label>
+                        <button>Create</button>
+                    </form>
+                </div>
+                <div className='todos-container'>
+                    {/* grabs todosDataArr from state
+                        - sorts data by is_complete value
+                        - maps data to render todos to page
+                            - element will require an onClick method
+                            - element will require a value set to the todos id.
+                            - element will require a className with a ternary to place a complete/incomplete class. */}
+                    {
+                        todoDataArr
+                            .sort((a, b) => a.is_complete - b.is_complete)
+                            .map(({id, is_complete, todo_description}) => {
+                                return (
+                                <div 
+                                    onClick={this.handleTodoUpdate} 
+                                    value={id} 
+                                    className={is_complete ? 'complete' : 'incomplete'}
+                                >
+                                {todo_description}
+                                </div>
+                                )
+                            })
+                    }
+                </div>
             </div>
-            <div>
-                {/* grabs todosDataArr from state
-                    - sorts data by is_complete value
-                    - maps data to render todos to page
-                        - element will require an onClick method
-                        - element will require a value set to the todos id.
-                        - element will require a className with a ternary to place a complete/incomplete class. */}
-                {
-                    todoDataArr
-                        .sort((a, b) => a.is_complete - b.is_complete)
-                        .map((item) => {
-                            return (
-                            <div 
-                                onClick={this.handleTodoUpdate} 
-                                value={item.id} 
-                                className={item.is_complete ? 'complete' : 'incomplete'}
-                            >
-                            {item.todo_description}
-                            </div>
-                            )
-                        })
-                }
-            </div>
-            </>
         )
     }
 }
